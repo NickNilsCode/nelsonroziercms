@@ -43,15 +43,16 @@ class BlogPage extends Component {
     }
     updateState = (e, prop) => {
       let obj = {};
-      // if(prop == title){
-      //   let date = new Date();
-      //   let year = date.getFullYear();
-      //   let month = date.getMonth() + 1;
-      //   let dashTitle = e.currentTarget.value.split(" ").join("-");
-      //   obj["link"] = `/blog/${year}/${month}/${dashTitle}`;
-      // }
-
+      if(prop == "title"){
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        month = month < 10 ? "0" + month : month;
+        let dashTitle = e.currentTarget.value.split(" ").join("-");
+        obj["link"] = `/blog/${year}/${month}/${dashTitle}`;
+      }
       obj[prop] = e.currentTarget.value;
+      console.log(obj);
       this.setState(obj);
     }
     updateShare = (e, prop) => {

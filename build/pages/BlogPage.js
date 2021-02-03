@@ -70,15 +70,19 @@ var BlogPage = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateState", function (e, prop) {
-      var obj = {}; // if(prop == title){
-      //   let date = new Date();
-      //   let year = date.getFullYear();
-      //   let month = date.getMonth() + 1;
-      //   let dashTitle = e.currentTarget.value.split(" ").join("-");
-      //   obj["link"] = `/blog/${year}/${month}/${dashTitle}`;
-      // }
+      var obj = {};
+
+      if (prop == "title") {
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        month = month < 10 ? "0" + month : month;
+        var dashTitle = e.currentTarget.value.split(" ").join("-");
+        obj["link"] = "/blog/".concat(year, "/").concat(month, "/").concat(dashTitle);
+      }
 
       obj[prop] = e.currentTarget.value;
+      console.log(obj);
 
       _this.setState(obj);
     });
