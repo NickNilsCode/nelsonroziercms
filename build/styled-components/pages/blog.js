@@ -3,11 +3,21 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CategoryButton = exports.CategoryFlex = exports.ContactLinks = exports.MessageLinks = exports.MessageForm = exports.MessageFormWrap = exports.NewContent = void 0;
+exports.BlogDiv = exports.CategoryButton = exports.CategoryFlex = exports.ContactLinks = exports.MessageLinks = exports.MessageForm = exports.MessageFormWrap = exports.NewContent = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _templateObject8() {
+  var data = _taggedTemplateLiteral(["\n  margin-bottom: 40px;\n  text-align: left;\n"]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject7() {
   var data = _taggedTemplateLiteral(["\n  padding: 12px 16px;\n  margin: 6px;\n  border: 1px solid #8d8d8d;\n  border-radius: 3px;\n  background-color: #fff;\n  color: #8d8d8d;\n  &.selectedCategory {\n    background-color: #e0e0e0;\n  }\n  &:hover {\n    background-color: #e0e0e0;\n    opacity: 0.8;\n    cursor: pointer;\n  }\n"]);
@@ -108,3 +118,7 @@ exports.CategoryFlex = CategoryFlex;
 var CategoryButton = _styledComponents["default"].div(_templateObject7());
 
 exports.CategoryButton = CategoryButton;
+
+var BlogDiv = _styledComponents["default"].div(_templateObject8());
+
+exports.BlogDiv = BlogDiv;

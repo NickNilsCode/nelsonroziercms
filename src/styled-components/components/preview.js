@@ -6,6 +6,27 @@ export const Preview = styled.div`
   hr {
     margin: 36px 0;
   }
+  h2.previewHeader {
+    background-color: #8d8d8d8d;
+    padding: 12px 0;
+  }
+  h2.previewTop {
+    background-color: #000;
+    padding: 12px 0;
+    color: #fff;
+  }
+  .previewBlock {
+    width: calc(100% - 32px);
+    padding: 40px 16px;
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+    position: relative;
+    display: block;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
 `;
 export const BottomBox = styled.div`
   border: 1px solid #dfdfdf;

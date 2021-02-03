@@ -76,6 +76,7 @@ var BlogFormComponent = /*#__PURE__*/function (_Component) {
           content = _this$props$blog.content,
           date = _this$props$blog.date,
           updateState = _this$props.updateState,
+          updateShare = _this$props.updateShare,
           updateAuthor = _this$props.updateAuthor,
           updateCategories = _this$props.updateCategories,
           submitForm = _this$props.submitForm,
@@ -89,6 +90,12 @@ var BlogFormComponent = /*#__PURE__*/function (_Component) {
         value: title,
         onChange: function onChange(e) {
           updateState(e, "title");
+        }
+      }), /*#__PURE__*/_react["default"].createElement(_global.TextArea, {
+        placeholder: "Short Description",
+        value: blurb,
+        onChange: function onChange(e) {
+          updateState(e, "blurb");
         }
       }), /*#__PURE__*/_react["default"].createElement("h2", null, "Authors"), /*#__PURE__*/_react["default"].createElement(_blog.CategoryFlex, null, authorList.map(function (a, i) {
         return /*#__PURE__*/_react["default"].createElement(_blog.CategoryButton, {
@@ -111,36 +118,31 @@ var BlogFormComponent = /*#__PURE__*/function (_Component) {
         type: "text",
         value: facebook,
         onChange: function onChange(e) {
-          updateState(e, "facebook");
+          updateShare(e, "facebook");
         }
       }), /*#__PURE__*/_react["default"].createElement(_global.Input, {
         placeholder: "Twitter Link",
         type: "text",
         value: twitter,
         onChange: function onChange(e) {
-          updateState(e, "twitter");
+          updateShare(e, "twitter");
         }
       }), /*#__PURE__*/_react["default"].createElement(_global.Input, {
         placeholder: "LinkedIn Link",
         type: "text",
         value: linkedin,
         onChange: function onChange(e) {
-          updateState(e, "linkedin");
+          updateShare(e, "linkedin");
         }
-      }), /*#__PURE__*/_react["default"].createElement(_global.Input, {
-        placeholder: "Short Description",
-        type: "text",
-        value: blurb,
-        onChange: function onChange(e) {
-          updateState(e, "blurb");
-        }
-      }), /*#__PURE__*/_react["default"].createElement(_.BlogContent, {
+      }), /*#__PURE__*/_react["default"].createElement("h2", null, "Content"), /*#__PURE__*/_react["default"].createElement(_.BlogContent, {
         blog: blog,
         addContent: addContent,
         deleteContent: deleteContent,
         updateContent: updateContent,
         updateType: updateType
-      }));
+      }), /*#__PURE__*/_react["default"].createElement(_blog.CategoryButton, {
+        onClick: addContent
+      }, "Add Content"));
     }
   }]);
 

@@ -9,7 +9,7 @@ exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _blog = require("../styled-components/pages/blog");
+var _blogform = require("../styled-components/components/blogform");
 
 var _blogcontent = require("../styled-components/components/blogcontent");
 
@@ -71,42 +71,42 @@ var BlogContentComponent = /*#__PURE__*/function (_Component) {
           updateAuthor = _this$props.updateAuthor,
           updateCategories = _this$props.updateCategories,
           submitForm = _this$props.submitForm,
-          addContent = _this$props.addContent,
           updateContent = _this$props.updateContent,
           deleteContent = _this$props.deleteContent,
           updateType = _this$props.updateType;
       return /*#__PURE__*/_react["default"].createElement(_blogcontent.BlogContent, null, content.map(function (a, i) {
         return /*#__PURE__*/_react["default"].createElement(_react.Fragment, {
           key: i
-        }, /*#__PURE__*/_react["default"].createElement(_blog.CategoryButton, {
+        }, /*#__PURE__*/_react["default"].createElement(_global.FlexDiv, {
+          style: {
+            justifyContent: "flex-start"
+          }
+        }, /*#__PURE__*/_react["default"].createElement(_blogform.SelectButton, {
           className: a.type == "h2" ? "selectedCategory" : "",
           onClick: function onClick() {
             updateType(i, "h2");
           }
-        }, "Header 2"), /*#__PURE__*/_react["default"].createElement(_blog.CategoryButton, {
+        }, "Header"), /*#__PURE__*/_react["default"].createElement(_blogform.SelectButton, {
           className: a.type == "p" ? "selectedCategory" : "",
           onClick: function onClick() {
             updateType(i, "p");
           }
-        }, "Paragraph"), /*#__PURE__*/_react["default"].createElement(_blog.CategoryButton, {
+        }, "Paragraph"), /*#__PURE__*/_react["default"].createElement(_blogform.SelectButton, {
           className: a.type == "ul" ? "selectedCategory" : "",
           onClick: function onClick() {
             updateType(i, "ul");
           }
-        }, "List"), /*#__PURE__*/_react["default"].createElement(_global.Input, {
-          type: "text",
+        }, "List"), /*#__PURE__*/_react["default"].createElement(_blogform.SelectButton, {
+          onClick: function onClick() {
+            deleteContent(i);
+          }
+        }, "Delete")), /*#__PURE__*/_react["default"].createElement(_global.TextArea, {
           value: a.content,
           onChange: function onChange(e) {
             updateContent(i, e.currentTarget.value);
           }
-        }), /*#__PURE__*/_react["default"].createElement(_blog.CategoryButton, {
-          onClick: function onClick() {
-            deleteContent(i);
-          }
-        }, "Delete"));
-      }), /*#__PURE__*/_react["default"].createElement(_blog.CategoryButton, {
-        onClick: addContent
-      }, "Add Content"));
+        }));
+      }));
     }
   }]);
 

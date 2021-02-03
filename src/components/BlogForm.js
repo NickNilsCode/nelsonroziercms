@@ -3,13 +3,22 @@ import { BlogContent } from './'
 import { BlogForm } from '../styled-components/components/blogform';
 import { CategoryFlex, CategoryButton } from '../styled-components/pages/blog';
 import { Input, BigGoldButton, TextArea } from '../styled-components/global';
-
 import categoriesList from '../data/categories';
-const authorList = ["John Green", "Ryan Nelson", "Clayton Christenson", "On behalf of Nelson & Rozier"]
+const authorList = [
+  "John Green",
+  "Ryan Nelson",
+  "Clayton Christenson",
+  "On behalf of Nelson & Rozier"
+];
 
 class BlogFormComponent extends Component {
   render(){
-    const { blog, blog: { title, categories, author, share, share: { facebook, linkedin, twitter }, blurb, content, date }, updateState, updateAuthor, updateCategories, submitForm, addContent, updateContent, deleteContent, updateType} = this.props;
+    const { blog, blog: {
+        title, categories, author, share, share: {
+          facebook, linkedin, twitter
+        }, blurb, content, date
+      }, updateState, updateShare, updateAuthor, updateCategories, submitForm, addContent, updateContent, deleteContent, updateType
+    } = this.props;
     return (
       <BlogForm>
         <Input
@@ -17,6 +26,11 @@ class BlogFormComponent extends Component {
           type="text"
           value={title}
           onChange={(e) => {updateState(e, "title")}}
+        />
+        <TextArea
+          placeholder="Short Description"
+          value={blurb}
+          onChange={(e) => {updateState(e, "blurb")}}
         />
         <h2>Authors</h2>
         <CategoryFlex>
@@ -50,26 +64,21 @@ class BlogFormComponent extends Component {
           placeholder="Facebook Link"
           type="text"
           value={facebook}
-          onChange={(e) => {updateState(e, "facebook")}}
+          onChange={(e) => {updateShare(e, "facebook")}}
         />
         <Input
           placeholder="Twitter Link"
           type="text"
           value={twitter}
-          onChange={(e) => {updateState(e, "twitter")}}
+          onChange={(e) => {updateShare(e, "twitter")}}
         />
         <Input
           placeholder="LinkedIn Link"
           type="text"
           value={linkedin}
-          onChange={(e) => {updateState(e, "linkedin")}}
+          onChange={(e) => {updateShare(e, "linkedin")}}
         />
-        <Input
-          placeholder="Short Description"
-          type="text"
-          value={blurb}
-          onChange={(e) => {updateState(e, "blurb")}}
-        />
+        <h2>Content</h2>
         <BlogContent
           blog={blog}
           addContent={addContent}
@@ -77,6 +86,7 @@ class BlogFormComponent extends Component {
           updateContent={updateContent}
           updateType={updateType}
         />
+        <CategoryButton onClick={addContent}>Add Content</CategoryButton>
       </BlogForm>
     );
   }

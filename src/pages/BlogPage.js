@@ -6,10 +6,12 @@ class BlogPage extends Component {
     constructor(props){
       super(props);
       this.state = {
+        _id: "",
         title: "",
         categories: [],
         author: "",
         date: new Date().toLocaleString('en-US'),
+        link: "",
         share: {
           facebook: "",
           twitter: "",
@@ -17,8 +19,8 @@ class BlogPage extends Component {
         },
         blurb: "",
         content: [{
-          type: "h1",
-          content: "this is content"
+          type: "h2",
+          content: ""
         }]
       }
     }
@@ -41,7 +43,22 @@ class BlogPage extends Component {
     }
     updateState = (e, prop) => {
       let obj = {};
+      // if(prop == title){
+      //   let date = new Date();
+      //   let year = date.getFullYear();
+      //   let month = date.getMonth() + 1;
+      //   let dashTitle = e.currentTarget.value.split(" ").join("-");
+      //   obj["link"] = `/blog/${year}/${month}/${dashTitle}`;
+      // }
+
       obj[prop] = e.currentTarget.value;
+      this.setState(obj);
+    }
+    updateShare = (e, prop) => {
+      let obj = {
+        share: {}
+      };
+      obj.share[prop] = e.currentTarget.value;
       this.setState(obj);
     }
     updateAuthor = (author) => {
@@ -85,6 +102,7 @@ class BlogPage extends Component {
                   <BlogForm
                     blog={this.state}
                     updateState={this.updateState}
+                    updateShare={this.updateShare}
                     updateAuthor={this.updateAuthor}
                     updateCategories={this.updateCategories}
                     submitForm={this.submitForm}
@@ -94,11 +112,12 @@ class BlogPage extends Component {
                     updateType={this.updateType}
                   />
                   <BigGoldButton type="submit">Save Blog</BigGoldButton>
-                  <hr/>
-                  <Preview blog={this.state}/>
-                  <BigGoldButton type="submit">Save Blog</BigGoldButton>
+
                 </form>
               </ContentWrapper>
+              <hr/>
+              <Preview blog={this.state}/>
+              <BigGoldButton type="submit">Save Blog</BigGoldButton>
           </PageWrapper>
       );
     }

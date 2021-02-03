@@ -69,3 +69,7 @@ export const CategoryButton = styled.div`
     cursor: pointer;
   }
 `;
+export const BlogDiv = styled.div`
+  margin-bottom: 40px;
+  text-align: left;
+`;

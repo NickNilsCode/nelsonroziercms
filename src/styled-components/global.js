@@ -174,7 +174,7 @@ export const TextArea = styled.textarea`
   padding: 12px;
   width: 100%;
   height: 174px;
-  margin: 0 0 12px 0;
+  margin: 12px 0;
   font-size: 16px;
   border: 1px solid #8d8d8d;
   border-radius: 1px;
@@ -188,10 +188,7 @@ export const HalfSize = styled.div`
 `;
 
 export const FlexDiv = styled.div`
-  display: block;
+  display: flex;
   align-items: ${props => props.alignItems ? props.alignItems : "center"};
   justify-content: space-between;
-  @media (min-width: 900px){
-    display: flex;
-  }
 `;

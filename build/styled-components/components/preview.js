@@ -42,7 +42,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  text-align: center;\n  hr {\n    margin: 36px 0;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  text-align: center;\n  hr {\n    margin: 36px 0;\n  }\n  h2.previewHeader {\n    background-color: #8d8d8d8d;\n    padding: 12px 0;\n  }\n  h2.previewTop {\n    background-color: #000;\n    padding: 12px 0;\n    color: #fff;\n  }\n  .previewBlock {\n    width: calc(100% - 32px);\n    padding: 40px 16px;\n    max-width: 900px;\n    margin: auto;\n    text-align: center;\n    position: relative;\n    display: block;\n    flex-direction: column;\n    align-items: flex-start;\n    justify-content: space-between;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;

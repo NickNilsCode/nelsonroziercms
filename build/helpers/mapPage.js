@@ -12,12 +12,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 function _default(pageData) {
   return pageData.map(function (a, i) {
     var A = a.type;
-    return /*#__PURE__*/_react["default"].createElement(A, {
-      key: i,
-      className: a.className,
-      dangerouslySetInnerHTML: {
-        __html: a.content
-      }
-    });
+
+    if (a.content) {
+      return /*#__PURE__*/_react["default"].createElement(A, {
+        key: i,
+        className: a.className,
+        dangerouslySetInnerHTML: {
+          __html: a.content
+        }
+      });
+    } else {
+      return /*#__PURE__*/_react["default"].createElement(A, {
+        key: i,
+        className: a.className
+      });
+    }
   });
 }

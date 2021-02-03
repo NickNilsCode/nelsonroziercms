@@ -13,6 +13,8 @@ var _ = require("./");
 
 var _preview = require("../styled-components/components/preview");
 
+var _global = require("../styled-components/global");
+
 var _mapBlog = _interopRequireDefault(require("../helpers/mapBlog"));
 
 var _mapPage = _interopRequireDefault(require("../helpers/mapPage"));
@@ -24,6 +26,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -73,7 +87,28 @@ var PreviewComponent = /*#__PURE__*/function (_Component) {
           blurb = _this$props$blog.blurb,
           content = _this$props$blog.content,
           date = _this$props$blog.date;
-      return /*#__PURE__*/_react["default"].createElement(_preview.Preview, null, /*#__PURE__*/_react["default"].createElement("h2", null, "Previews"), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement("h2", null, "Side Bar"), /*#__PURE__*/_react["default"].createElement(_preview.BottomBox, null, /*#__PURE__*/_react["default"].createElement(_preview.BoxTitle, null, "VISIT OUR BLOG"), /*#__PURE__*/_react["default"].createElement(_preview.BoxContent, null, _blogs["default"].map(function (a, i) {
+      return /*#__PURE__*/_react["default"].createElement(_preview.Preview, null, /*#__PURE__*/_react["default"].createElement("h2", {
+        className: "previewTop"
+      }, "Previews"), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement("h2", {
+        className: "previewHeader"
+      }, "Blog Page"), /*#__PURE__*/_react["default"].createElement(_global.Content, {
+        className: "previewBlock"
+      }, /*#__PURE__*/_react["default"].createElement("h1", null, title), /*#__PURE__*/_react["default"].createElement("p", null, /*#__PURE__*/_react["default"].createElement("a", {
+        href: "/"
+      }, author), " | ", date, " | ", categories.join(', ')), (0, _mapPage["default"])(content), /*#__PURE__*/_react["default"].createElement(_.BlogSocial, {
+        share: share
+      })), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement("h2", {
+        className: "previewHeader"
+      }, "Blog Main Page"), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "previewBlock"
+      }, (0, _mapBlog["default"])([blog].concat(_toConsumableArray(_blogs["default"])))), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement("h2", {
+        className: "previewHeader"
+      }, "Side Bar"), /*#__PURE__*/_react["default"].createElement(_preview.BottomBox, {
+        className: "previewBlock",
+        style: {
+          maxWidth: "300px"
+        }
+      }, /*#__PURE__*/_react["default"].createElement(_preview.BoxTitle, null, "VISIT OUR BLOG"), /*#__PURE__*/_react["default"].createElement(_preview.BoxContent, null, [blog].concat(_toConsumableArray(_blogs["default"])).slice(0, 2).map(function (a, i) {
         return /*#__PURE__*/_react["default"].createElement("a", {
           key: i,
           href: a.link
@@ -83,11 +118,21 @@ var PreviewComponent = /*#__PURE__*/function (_Component) {
         className: "readMore"
       }, /*#__PURE__*/_react["default"].createElement("div", null, "Read More ", /*#__PURE__*/_react["default"].createElement("i", {
         className: "fas fa-chevron-circle-right"
-      }))))), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement("h2", null, "Blog Main Page"), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement("h2", null, "Blog Page"), /*#__PURE__*/_react["default"].createElement("h1", null, title), /*#__PURE__*/_react["default"].createElement("p", null, /*#__PURE__*/_react["default"].createElement("a", {
-        href: "/"
-      }, author), " | ", date, " | ", categories.join(', ')), (0, _mapPage["default"])(content), /*#__PURE__*/_react["default"].createElement(_.BlogSocial, {
-        share: share
-      }));
+      }))))), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement("h2", {
+        className: "previewHeader"
+      }, "Responsive Bottom Section"), /*#__PURE__*/_react["default"].createElement(_preview.BottomBox, {
+        className: "previewBlock"
+      }, /*#__PURE__*/_react["default"].createElement(_preview.BoxTitle, null, "VISIT OUR BLOG"), /*#__PURE__*/_react["default"].createElement(_preview.BoxContent, null, [blog].concat(_toConsumableArray(_blogs["default"])).slice(0, 2).map(function (a, i) {
+        return /*#__PURE__*/_react["default"].createElement("a", {
+          key: i,
+          href: a.link
+        }, a.title);
+      }), /*#__PURE__*/_react["default"].createElement("a", {
+        href: "/blog",
+        className: "readMore"
+      }, /*#__PURE__*/_react["default"].createElement("div", null, "Read More ", /*#__PURE__*/_react["default"].createElement("i", {
+        className: "fas fa-chevron-circle-right"
+      }))))), /*#__PURE__*/_react["default"].createElement("hr", null));
     }
   }]);
 

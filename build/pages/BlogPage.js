@@ -70,8 +70,24 @@ var BlogPage = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateState", function (e, prop) {
-      var obj = {};
+      var obj = {}; // if(prop == title){
+      //   let date = new Date();
+      //   let year = date.getFullYear();
+      //   let month = date.getMonth() + 1;
+      //   let dashTitle = e.currentTarget.value.split(" ").join("-");
+      //   obj["link"] = `/blog/${year}/${month}/${dashTitle}`;
+      // }
+
       obj[prop] = e.currentTarget.value;
+
+      _this.setState(obj);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "updateShare", function (e, prop) {
+      var obj = {
+        share: {}
+      };
+      obj.share[prop] = e.currentTarget.value;
 
       _this.setState(obj);
     });
@@ -134,10 +150,12 @@ var BlogPage = /*#__PURE__*/function (_Component) {
     });
 
     _this.state = {
+      _id: "",
       title: "",
       categories: [],
       author: "",
       date: new Date().toLocaleString('en-US'),
+      link: "",
       share: {
         facebook: "",
         twitter: "",
@@ -145,8 +163,8 @@ var BlogPage = /*#__PURE__*/function (_Component) {
       },
       blurb: "",
       content: [{
-        type: "h1",
-        content: "this is content"
+        type: "h2",
+        content: ""
       }]
     };
     return _this;
@@ -169,6 +187,7 @@ var BlogPage = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/_react["default"].createElement(_components.BlogForm, {
         blog: this.state,
         updateState: this.updateState,
+        updateShare: this.updateShare,
         updateAuthor: this.updateAuthor,
         updateCategories: this.updateCategories,
         submitForm: this.submitForm,
@@ -178,11 +197,11 @@ var BlogPage = /*#__PURE__*/function (_Component) {
         updateType: this.updateType
       }), /*#__PURE__*/_react["default"].createElement(_global.BigGoldButton, {
         type: "submit"
-      }, "Save Blog"), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement(_components.Preview, {
+      }, "Save Blog"))), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement(_components.Preview, {
         blog: this.state
       }), /*#__PURE__*/_react["default"].createElement(_global.BigGoldButton, {
         type: "submit"
-      }, "Save Blog"))));
+      }, "Save Blog"));
     }
   }]);
 

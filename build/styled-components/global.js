@@ -12,7 +12,7 @@ var _colors = require("./colors");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _templateObject11() {
-  var data = _taggedTemplateLiteral(["\n  display: block;\n  align-items: ", ";\n  justify-content: space-between;\n  @media (min-width: 900px){\n    display: flex;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: ", ";\n  justify-content: space-between;\n"]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -32,7 +32,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  var data = _taggedTemplateLiteral(["\n  background: #fff;\n  padding: 12px;\n  width: 100%;\n  height: 174px;\n  margin: 0 0 12px 0;\n  font-size: 16px;\n  border: 1px solid #8d8d8d;\n  border-radius: 1px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  background: #fff;\n  padding: 12px;\n  width: 100%;\n  height: 174px;\n  margin: 12px 0;\n  font-size: 16px;\n  border: 1px solid #8d8d8d;\n  border-radius: 1px;\n"]);
 
   _templateObject9 = function _templateObject9() {
     return data;
