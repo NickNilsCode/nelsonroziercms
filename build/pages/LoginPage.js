@@ -60,17 +60,18 @@ var Login = /*#__PURE__*/function (_Component) {
       _this.setState(obj);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "login", function (e, obj) {
+    _defineProperty(_assertThisInitialized(_this), "login", function (e) {
+      console.log(_this.state);
       e.preventDefault();
-      fetch('/api/login', {
+      fetch('/api/auth', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(obj)
+        body: JSON.stringify(_this.state)
       }).then(function (res) {
         if (res.status === 200) return res.json();else if (res.status === 401) return {
-          message: "Incorrect email or password"
+          message: "Incorrect username or password"
         };else return {};
       }).then(function (data) {
         console.log("auth response", data);
@@ -78,15 +79,7 @@ var Login = /*#__PURE__*/function (_Component) {
         if (data.message) {
           alert(data.message);
         } else if (data._id) {
-          if (_this.props.data.subscriptionID) {
-            _this.setState({
-              user: data
-            }, function () {
-              _this.addSubscriptionToUser();
-            });
-          } else {
-            window.location.href = "/myaccount";
-          }
+          window.location.href = "/list";
         }
       })["catch"](function (err) {
         console.log("login err", err);
@@ -94,13 +87,26 @@ var Login = /*#__PURE__*/function (_Component) {
     });
 
     _this.state = {
-      email: "",
+      username: "",
       password: ""
     };
     return _this;
   }
 
   _createClass(Login, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      fetch('/api/getMe').then(function (res) {
+        if (res.status === 200) return res.json();else return {};
+      }).then(function (data) {
+        if (data) {
+          window.location.href = "/list";
+        }
+      })["catch"](function (err) {
+        console.log("login err", err);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -109,19 +115,17 @@ var Login = /*#__PURE__*/function (_Component) {
           switchDisplay = _this$props.switchDisplay,
           login = _this$props.login;
       var _this$state = this.state,
-          email = _this$state.email,
+          username = _this$state.username,
           password = _this$state.password;
       return /*#__PURE__*/_react["default"].createElement(_global.PageWrapper, null, /*#__PURE__*/_react["default"].createElement(_components.Header, null), /*#__PURE__*/_react["default"].createElement(_global.ContentWrapper, null, /*#__PURE__*/_react["default"].createElement(_login.LoginContent, null, /*#__PURE__*/_react["default"].createElement("h2", null, "Log In"), /*#__PURE__*/_react["default"].createElement("form", {
-        onSubmit: function onSubmit(e) {
-          login(e, _this2.state);
-        }
+        onSubmit: this.login
       }, /*#__PURE__*/_react["default"].createElement(_global.Input, {
-        placeholder: "Email Address",
-        type: "email",
-        value: email,
+        placeholder: "Username",
+        type: "text",
+        value: username,
         autoComplete: "on",
         onChange: function onChange(e) {
-          _this2.updateState(e, "email");
+          _this2.updateState(e, "username");
         }
       }), /*#__PURE__*/_react["default"].createElement(_global.Input, {
         placeholder: "Password",

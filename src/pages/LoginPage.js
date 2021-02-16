@@ -7,7 +7,7 @@ class Login extends Component {
   constructor(props){
     super(props)
     this.state = {
-      email: "",
+      username: "",
       password: ""
     }
   }
@@ -16,16 +16,17 @@ class Login extends Component {
     obj[prop] = e.currentTarget.value;
     this.setState(obj);
   }
-  login = (e, obj) => {
+  login = (e) => {
+    console.log(this.state);
     e.preventDefault();
-    fetch('/api/login', {
+    fetch('/api/auth', {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(obj)
+      body: JSON.stringify(this.state)
     })
     .then((res) => {
       if(res.status === 200) return res.json();
-      else if(res.status === 401) return { message: "Incorrect email or password"}
+      else if(res.status === 401) return { message: "Incorrect username or password"}
       else return {}
     })
     .then((data) => {
@@ -33,15 +34,22 @@ class Login extends Component {
       if(data.message){
         alert(data.message);
       } else if(data._id){
-        if(this.props.data.subscriptionID){
-          this.setState({
-            user: data
-          }, () => {
-            this.addSubscriptionToUser();
-          })
-        } else {
-          window.location.href = "/myaccount"
-        }
+          window.location.href = "/list"
+      }
+    })
+    .catch((err) => {
+      console.log("login err", err);
+    })
+  }
+  componentDidMount(){
+    fetch('/api/getMe')
+    .then((res) => {
+      if(res.status === 200) return res.json();
+      else return {}
+    })
+    .then((data) => {
+      if(data){
+        window.location.href = "/list"
       }
     })
     .catch((err) => {
@@ -50,20 +58,20 @@ class Login extends Component {
   }
   render(){
     const { switchDisplay, login } = this.props;
-    const { email, password } = this.state;
+    const { username, password } = this.state;
     return (
         <PageWrapper>
             <Header/>
             <ContentWrapper>
               <LoginContent>
                 <h2>Log In</h2>
-                <form onSubmit={(e) => {login(e, this.state)}}>
+                <form onSubmit={this.login}>
                   <Input
-                    placeholder="Email Address"
-                    type="email"
-                    value={email}
+                    placeholder="Username"
+                    type="text"
+                    value={username}
                     autoComplete="on"
-                    onChange={(e) => {this.updateState(e, "email")}}
+                    onChange={(e) => {this.updateState(e, "username")}}
                   />
                   <Input
                     placeholder="Password"

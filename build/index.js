@@ -91,13 +91,17 @@ app.get('/list', function (req, res) {
   res.send(returnHTML(data, listBundle, _roots.ListRoot, "list"));
 });
 app.get('/new', function (req, res) {
-  var data = {};
+  var data = {
+    id: "",
+    edit: false
+  };
   res.set('Cache-Control', 'public, max-age=31557600');
   res.send(returnHTML(data, blogBundle, _roots.BlogRoot, "new"));
 });
 app.get('/edit/:id', function (req, res) {
   var data = {
-    id: req.params.id
+    id: req.params.id,
+    edit: true
   };
   res.set('Cache-Control', 'public, max-age=31557600');
   res.send(returnHTML(data, blogBundle, _roots.BlogRoot, "edit"));
@@ -107,16 +111,17 @@ app.get('/api/images/:id', function (req, res) {
   res.set('Cache-Control', 'public, max-age=31557600');
   res.sendFile(_path["default"].join(__dirname, '../images/' + req.params.id));
 });
-app.post('/api/auth', _passport["default"].authenticate('local-signup'), _userCtrl["default"].login);
+app.post('/api/auth', _passport["default"].authenticate('local-login'), _userCtrl["default"].login);
+app.post('/api/signup', _passport["default"].authenticate('local-signup'), _userCtrl["default"].login);
 app.get('/api/getMe', _userCtrl["default"].getMe);
 app.get('/api/logout', _userCtrl["default"].logout);
 app.get('/api/users', _userCtrl["default"].read);
-app.put('/api/users/:id', _userCtrl["default"].update);
-app.get('/api/blogs', _blogCtrl["default"].read);
-app.get('/api/blogs/:id', _blogCtrl["default"].readOne);
-app.post('/api/blogs', _blogCtrl["default"].create);
-app.put('/api/blogs/:id', _blogCtrl["default"].update);
-app["delete"]('/api/blogs/:id', _blogCtrl["default"].destroy);
+app.get('/api/blogs/getAll', _blogCtrl["default"].read);
+app.get('/api/blogs/getThree', _blogCtrl["default"].readThree);
+app.get('/api/blogs/getOne/:id', _blogCtrl["default"].readOne);
+app.post('/api/blogs/add', _blogCtrl["default"].create);
+app.put('/api/blogs/update/:id', _blogCtrl["default"].update);
+app.get('/api/blogs/delete/:id', _blogCtrl["default"].destroy);
 app.get('/health', function (req, res) {
   return res.send('OK');
 });

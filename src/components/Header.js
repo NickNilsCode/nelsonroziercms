@@ -5,7 +5,7 @@ class HeaderComponent extends Component {
   render(){
     return (
       <Header>
-        <a href="/"><img src="/api/images/brand-logo.png"/></a>
+        <a href="/list"><img src="/api/images/brand-logo.png"/></a>
         <h1>Blog Management Tool</h1>
       </Header>
     );

@@ -6,11 +6,11 @@ class BlogPage extends Component {
     constructor(props){
       super(props);
       this.state = {
-        _id: "",
+        _id: props.data.id || "",
+        edit: props.data.edit || false,
         title: "",
         categories: [],
         author: "",
-        date: new Date().toLocaleString('en-US'),
         link: "",
         share: {
           facebook: "",
@@ -19,40 +19,59 @@ class BlogPage extends Component {
         },
         blurb: "",
         content: [{
-          type: "h2",
+          type: "p",
           content: ""
         }]
       }
+    }
+    addBlog = (blog) => {
+      delete blog._id;
+      delete blog.edit;
+      fetch('/api/blogs/add', {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(blog)
+      })
+      .then(res => res.json())
+      .then(res => {
+        alert("Blog Added Successfully!")
+        window.location.href = "/list"
+      })
+      .catch(err => {
+        alert("Something went wrong. Please contact Administrator directly via email or telephone. We are sorry for the inconvenience.")
+      })
+    }
+
+    editBlog = (blog) => {
+      delete blog.edit;
+      fetch('/api/blogs/update/' + blog._id, {
+        method: "PUT",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(blog)
+      })
+      .then(res => res.json())
+      .then(res => {
+        alert("Blog Successfully Updated!")
+        window.location.href = "/list"
+      })
+      .catch(err => {
+        alert("Something went wrong. Please contact Administrator directly via email or telephone. We are sorry for the inconvenience.")
+      })
     }
 
     submitForm = (e) => {
       e.preventDefault();
       console.log(this.state);
-      fetch('/emailer', {
-        method: "POST",
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(this.state)
-      })
-      .then(res => res.json())
-      .then(res => {
-        window.location.href = "/list"
-      })
-      .catch(err => {
-        alert("Something went wrong. Please contact Nelson Rozier directly via email or telephone. We are sorry for the inconvenience.")
-      })
+      let blog = {...this.state};
+      if(blog.edit){
+        this.editBlog(blog)
+      } else {
+        this.addBlog(blog)
+      }
     }
     updateState = (e, prop) => {
       let obj = {};
-      if(prop == "title"){
-        let date = new Date();
-        let year = date.getFullYear();
-        let month = date.getMonth() + 1;
-        month = month < 10 ? "0" + month : month;
-        let dashTitle = e.currentTarget.value.split(" ").join("-");
-        obj["link"] = `/blog/${year}/${month}/${dashTitle}`;
-      }
       obj[prop] = e.currentTarget.value;
-      console.log(obj);
       this.setState(obj);
     }
     updateShare = (e, prop) => {
@@ -92,6 +111,36 @@ class BlogPage extends Component {
       val[i].type = value;
       this.setState({ content: val });
     }
+    componentDidMount(){
+      // fetch('/api/getMe')
+      // .then((res) => {
+      //   if(res.status === 200) return res.json();
+      //   else return {}
+      // })
+      // .then((data) => {
+      //   if(!data){
+      //     window.location.href = "/"
+      //   }
+      if(this.props.data.id){
+        fetch('/api/blogs/getOne/' + this.props.data.id)
+        .then((res) => {
+          if(res.status === 200) return res.json();
+          else return {}
+        })
+        .then((blog) => {
+          if(blog){
+            this.setState({ ...blog })
+          }
+        })
+        .catch((err) => {
+          console.log("login err", err);
+        })
+      }
+      // })
+      // .catch((err) => {
+      //   console.log("login err", err);
+      // })
+    }
     render(){
       const { title, categories, author, facebook, twitter, linkedin, blurb, content } = this.state;
       return (
@@ -113,7 +162,6 @@ class BlogPage extends Component {
                     updateType={this.updateType}
                   />
                   <BigGoldButton type="submit">Save Blog</BigGoldButton>
-
                 </form>
               </ContentWrapper>
               <hr/>

@@ -71,13 +71,16 @@ app.get('/list', (req, res) => {
 });
 app.get('/new', (req, res) => {
   let data = {
+    id: "",
+    edit: false
   };
   res.set('Cache-Control', 'public, max-age=31557600');
   res.send(returnHTML(data, blogBundle, BlogRoot, "new"));
 });
 app.get('/edit/:id', (req, res) => {
   let data = {
-    id: req.params.id
+    id: req.params.id,
+    edit: true
   };
   res.set('Cache-Control', 'public, max-age=31557600');
   res.send(returnHTML(data, blogBundle, BlogRoot, "edit"));
@@ -87,17 +90,20 @@ app.get('/api/images/:id', (req, res) => {
   res.set('Cache-Control', 'public, max-age=31557600');
   res.sendFile(path.join(__dirname, '../images/' + req.params.id));
 });
-app.post('/api/auth', passport.authenticate('local-signup'), userCtrl.login);
+
+app.post('/api/auth', passport.authenticate('local-login'), userCtrl.login);
+app.post('/api/signup', passport.authenticate('local-signup'), userCtrl.login);
+
 app.get('/api/getMe', userCtrl.getMe);
 app.get('/api/logout', userCtrl.logout);
 app.get('/api/users', userCtrl.read);
-app.put('/api/users/:id', userCtrl.update);
 
-app.get('/api/blogs', blogCtrl.read);
-app.get('/api/blogs/:id', blogCtrl.readOne);
-app.post('/api/blogs', blogCtrl.create);
-app.put('/api/blogs/:id', blogCtrl.update);
-app.delete('/api/blogs/:id', blogCtrl.destroy);
+app.get('/api/blogs/getAll', blogCtrl.read);
+app.get('/api/blogs/getThree', blogCtrl.readThree);
+app.get('/api/blogs/getOne/:id', blogCtrl.readOne);
+app.post('/api/blogs/add', blogCtrl.create);
+app.put('/api/blogs/update/:id', blogCtrl.update);
+app.get('/api/blogs/delete/:id', blogCtrl.destroy);
 
 
 app.get('/health', (req, res) => res.send('OK'));

@@ -1,9 +1,20 @@
 const mongoose = require('mongoose');
 
   var blogSchema = new mongoose.Schema({
-    prop1: {type: String, required: true},
-    prop2: {type: Number, required: true},
-    user: {type: mongoose.Schema.Types.ObjectId, ref: "users"}
+    title: { type: String, required: true },
+    categories: [{ type: String }],
+    author: { type: String, required: true },
+    date: { type: Date, default: new Date().toLocaleString('en-US') },
+    share: {
+      facebook: { type: String },
+      twitter: { type: String },
+      linkedin: { type: String }
+    },
+    blurb: {type: String, required: true},
+    content: [{
+      type: { type: String },
+      content: { type: String }
+    }]
   });
 
   module.exports = mongoose.model('blogs', blogSchema);

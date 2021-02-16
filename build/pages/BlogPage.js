@@ -17,6 +17,10 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -51,38 +55,59 @@ var BlogPage = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "submitForm", function (e) {
-      e.preventDefault();
-      console.log(_this.state);
-      fetch('/emailer', {
+    _defineProperty(_assertThisInitialized(_this), "addBlog", function (blog) {
+      delete blog._id;
+      delete blog.edit;
+      fetch('/api/blogs/add', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(_this.state)
+        body: JSON.stringify(blog)
       }).then(function (res) {
         return res.json();
       }).then(function (res) {
+        alert("Blog Added Successfully!");
         window.location.href = "/list";
       })["catch"](function (err) {
-        alert("Something went wrong. Please contact Nelson Rozier directly via email or telephone. We are sorry for the inconvenience.");
+        alert("Something went wrong. Please contact Administrator directly via email or telephone. We are sorry for the inconvenience.");
       });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "editBlog", function (blog) {
+      delete blog.edit;
+      fetch('/api/blogs/update/' + blog._id, {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(blog)
+      }).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        alert("Blog Successfully Updated!");
+        window.location.href = "/list";
+      })["catch"](function (err) {
+        alert("Something went wrong. Please contact Administrator directly via email or telephone. We are sorry for the inconvenience.");
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "submitForm", function (e) {
+      e.preventDefault();
+      console.log(_this.state);
+
+      var blog = _objectSpread({}, _this.state);
+
+      if (blog.edit) {
+        _this.editBlog(blog);
+      } else {
+        _this.addBlog(blog);
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateState", function (e, prop) {
       var obj = {};
-
-      if (prop == "title") {
-        var date = new Date();
-        var year = date.getFullYear();
-        var month = date.getMonth() + 1;
-        month = month < 10 ? "0" + month : month;
-        var dashTitle = e.currentTarget.value.split(" ").join("-");
-        obj["link"] = "/blog/".concat(year, "/").concat(month, "/").concat(dashTitle);
-      }
-
       obj[prop] = e.currentTarget.value;
-      console.log(obj);
 
       _this.setState(obj);
     });
@@ -154,11 +179,11 @@ var BlogPage = /*#__PURE__*/function (_Component) {
     });
 
     _this.state = {
-      _id: "",
+      _id: props.data.id || "",
+      edit: props.data.edit || false,
       title: "",
       categories: [],
       author: "",
-      date: new Date().toLocaleString('en-US'),
       link: "",
       share: {
         facebook: "",
@@ -167,7 +192,7 @@ var BlogPage = /*#__PURE__*/function (_Component) {
       },
       blurb: "",
       content: [{
-        type: "h2",
+        type: "p",
         content: ""
       }]
     };
@@ -175,6 +200,36 @@ var BlogPage = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(BlogPage, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      // fetch('/api/getMe')
+      // .then((res) => {
+      //   if(res.status === 200) return res.json();
+      //   else return {}
+      // })
+      // .then((data) => {
+      //   if(!data){
+      //     window.location.href = "/"
+      //   }
+      if (this.props.data.id) {
+        fetch('/api/blogs/getOne/' + this.props.data.id).then(function (res) {
+          if (res.status === 200) return res.json();else return {};
+        }).then(function (blog) {
+          if (blog) {
+            _this2.setState(_objectSpread({}, blog));
+          }
+        })["catch"](function (err) {
+          console.log("login err", err);
+        });
+      } // })
+      // .catch((err) => {
+      //   console.log("login err", err);
+      // })
+
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$state = this.state,

@@ -50,7 +50,7 @@ var HeaderComponent = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/_react["default"].createElement(_header.Header, null, /*#__PURE__*/_react["default"].createElement("a", {
-        href: "/"
+        href: "/list"
       }, /*#__PURE__*/_react["default"].createElement("img", {
         src: "/api/images/brand-logo.png"
       })), /*#__PURE__*/_react["default"].createElement("h1", null, "Blog Management Tool"));
