@@ -125,18 +125,12 @@ app.get('/api/blogs/delete/:id', _blogCtrl["default"].destroy);
 app.get('/health', function (req, res) {
   return res.send('OK');
 });
-var mongoUri = 'mongodb+srv://' + cryptr.decrypt(_config["default"].dbuser) + ':' + cryptr.decrypt(_config["default"].dbpass) + '@nelsonrozier.1dnpj.mongodb.net/nelsonrozier?retryWrites=true&w=majority';
-
-_mongoose["default"].connect(mongoUri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-
-_mongoose["default"].connection.on('error', console.error.bind(console, 'connection error'));
-
-_mongoose["default"].connection.once('open', function () {
-  console.log("Connected to mongoDB");
-});
+console.log("crash", process.env.MONGODB_URI); // var mongoUri = process.env.MONGODB_URI ? process.env.MONGODB_URI : 'mongodb+srv://'+cryptr.decrypt(config.dbuser)+':'+cryptr.decrypt(config.dbpass)+'@nelsonrozier.1dnpj.mongodb.net/nelsonrozier?retryWrites=true&w=majority';
+// mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connection.on('error', console.error.bind(console, 'connection error'));
+// mongoose.connection.once('open', function(){
+//  console.log("Connected to mongoDB");
+// });
 
 app.listen(PORT, function () {
   console.log('Running on http://localhost:' + PORT);
