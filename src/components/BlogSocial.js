@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BlogSocial, SocialButton, Logo, SocialText } from '../styled-components/components/blogSocial';
+import { BlogSocial, SocialButton, Logo, SocialText } from '../styled-components/components/blogsocial';
 
 class BlogSocialComponent extends Component {
   render(){

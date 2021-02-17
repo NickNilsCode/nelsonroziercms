@@ -9,7 +9,7 @@ exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _blogSocial = require("../styled-components/components/blogSocial");
+var _blogsocial = require("../styled-components/components/blogsocial");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -53,34 +53,34 @@ var BlogSocialComponent = /*#__PURE__*/function (_Component) {
           facebook = _this$props$share.facebook,
           linkedin = _this$props$share.linkedin,
           twitter = _this$props$share.twitter;
-      return /*#__PURE__*/_react["default"].createElement(_blogSocial.BlogSocial, null, /*#__PURE__*/_react["default"].createElement(_blogSocial.SocialButton, {
+      return /*#__PURE__*/_react["default"].createElement(_blogsocial.BlogSocial, null, /*#__PURE__*/_react["default"].createElement(_blogsocial.SocialButton, {
         href: facebook,
         className: "blogFacebook"
-      }, /*#__PURE__*/_react["default"].createElement(_blogSocial.Logo, {
+      }, /*#__PURE__*/_react["default"].createElement(_blogsocial.Logo, {
         className: "socialLogo"
       }, /*#__PURE__*/_react["default"].createElement("i", {
         className: "fab fa-facebook-f"
       }), /*#__PURE__*/_react["default"].createElement("i", {
         className: "fab fa-facebook-f"
-      })), /*#__PURE__*/_react["default"].createElement(_blogSocial.SocialText, null, "Facebook")), /*#__PURE__*/_react["default"].createElement(_blogSocial.SocialButton, {
+      })), /*#__PURE__*/_react["default"].createElement(_blogsocial.SocialText, null, "Facebook")), /*#__PURE__*/_react["default"].createElement(_blogsocial.SocialButton, {
         href: linkedin,
         className: "blogLinkedin"
-      }, /*#__PURE__*/_react["default"].createElement(_blogSocial.Logo, {
+      }, /*#__PURE__*/_react["default"].createElement(_blogsocial.Logo, {
         className: "socialLogo"
       }, /*#__PURE__*/_react["default"].createElement("i", {
         className: "fab fa-linkedin-in"
       }), /*#__PURE__*/_react["default"].createElement("i", {
         className: "fab fa-linkedin-in"
-      })), /*#__PURE__*/_react["default"].createElement(_blogSocial.SocialText, null, "LinkedIn")), /*#__PURE__*/_react["default"].createElement(_blogSocial.SocialButton, {
+      })), /*#__PURE__*/_react["default"].createElement(_blogsocial.SocialText, null, "LinkedIn")), /*#__PURE__*/_react["default"].createElement(_blogsocial.SocialButton, {
         href: twitter,
         className: "blogTwitter"
-      }, /*#__PURE__*/_react["default"].createElement(_blogSocial.Logo, {
+      }, /*#__PURE__*/_react["default"].createElement(_blogsocial.Logo, {
         className: "socialLogo"
       }, /*#__PURE__*/_react["default"].createElement("i", {
         className: "fab fa-twitter"
       }), /*#__PURE__*/_react["default"].createElement("i", {
         className: "fab fa-twitter"
-      })), /*#__PURE__*/_react["default"].createElement(_blogSocial.SocialText, null, "Twitter")));
+      })), /*#__PURE__*/_react["default"].createElement(_blogsocial.SocialText, null, "Twitter")));
     }
   }]);
 
