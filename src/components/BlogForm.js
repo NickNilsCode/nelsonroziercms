@@ -79,13 +79,11 @@ class BlogFormComponent extends Component {
           onChange={(e) => {updateShare(e, "linkedin")}}
         />
         <h2>Content</h2>
-        <BlogContent
-          blog={blog}
-          addContent={addContent}
-          deleteContent={deleteContent}
-          updateContent={updateContent}
-          updateType={updateType}
-        />
+        {
+          content.map((a,i) => {
+            return <BlogContent key={i} content={a} addContent={addContent} deleteContent={deleteContent} updateContent={updateContent} index={i} updateType={updateType}/>
+          })
+        }
         <CategoryButton onClick={addContent}>Add Content</CategoryButton>
       </BlogForm>
     );

@@ -17,7 +17,6 @@ class Login extends Component {
     this.setState(obj);
   }
   login = (e) => {
-    console.log(this.state);
     e.preventDefault();
     fetch('/api/auth', {
       method: "POST",

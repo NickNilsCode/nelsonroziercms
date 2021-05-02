@@ -61,7 +61,6 @@ class BlogPage extends Component {
 
     submitForm = (e) => {
       e.preventDefault();
-      console.log(this.state);
       let blog = {...this.state};
       if(blog.edit){
         this.editBlog(blog)
@@ -75,9 +74,7 @@ class BlogPage extends Component {
       this.setState(obj);
     }
     updateShare = (e, prop) => {
-      let obj = {
-        share: {}
-      };
+      let obj = { share: {} };
       obj.share[prop] = e.currentTarget.value;
       this.setState(obj);
     }
@@ -98,7 +95,7 @@ class BlogPage extends Component {
     }
     addContent = () => {
       let arr = this.state.content;
-      arr.push({ type: "h1", content: "" })
+      arr.push({ type: "h2", content: "" })
       this.setState({ content: arr });
     }
     deleteContent = (i) => {
@@ -122,6 +119,7 @@ class BlogPage extends Component {
       //     window.location.href = "/"
       //   }
       if(this.props.data.id){
+        console.log("crash", this.props.data.id);
         fetch('/api/blogs/getOne/' + this.props.data.id)
         .then((res) => {
           if(res.status === 200) return res.json();

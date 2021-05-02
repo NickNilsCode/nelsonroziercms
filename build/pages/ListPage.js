@@ -121,7 +121,7 @@ var List = /*#__PURE__*/function (_Component) {
         return /*#__PURE__*/_react["default"].createElement("tr", {
           key: a
         }, /*#__PURE__*/_react["default"].createElement("td", null, /*#__PURE__*/_react["default"].createElement("a", {
-          href: a.link
+          href: '/edit/' + a._id
         }, a.title)), /*#__PURE__*/_react["default"].createElement("td", null, a.date), /*#__PURE__*/_react["default"].createElement("td", null, a.author), /*#__PURE__*/_react["default"].createElement("td", null, a.categories.join(', ')), /*#__PURE__*/_react["default"].createElement("td", null, /*#__PURE__*/_react["default"].createElement("a", {
           href: '/edit/' + a._id
         }, /*#__PURE__*/_react["default"].createElement(_global.GoldButton, null, "Edit"))), /*#__PURE__*/_react["default"].createElement("td", null, /*#__PURE__*/_react["default"].createElement("a", {

@@ -80,7 +80,7 @@ class List extends Component {
                       blogs.map((a,i) => {
                         return (
                           <tr key={a}>
-                            <td><a href={a.link}>{a.title}</a></td>
+                            <td><a href={'/edit/' + a._id}>{a.title}</a></td>
                             <td>{a.date}</td>
                             <td>{a.author}</td>
                             <td>{a.categories.join(', ')}</td>

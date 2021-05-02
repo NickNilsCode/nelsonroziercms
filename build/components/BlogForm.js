@@ -134,12 +134,16 @@ var BlogFormComponent = /*#__PURE__*/function (_Component) {
         onChange: function onChange(e) {
           updateShare(e, "linkedin");
         }
-      }), /*#__PURE__*/_react["default"].createElement("h2", null, "Content"), /*#__PURE__*/_react["default"].createElement(_.BlogContent, {
-        blog: blog,
-        addContent: addContent,
-        deleteContent: deleteContent,
-        updateContent: updateContent,
-        updateType: updateType
+      }), /*#__PURE__*/_react["default"].createElement("h2", null, "Content"), content.map(function (a, i) {
+        return /*#__PURE__*/_react["default"].createElement(_.BlogContent, {
+          key: i,
+          content: a,
+          addContent: addContent,
+          deleteContent: deleteContent,
+          updateContent: updateContent,
+          index: i,
+          updateType: updateType
+        });
       }), /*#__PURE__*/_react["default"].createElement(_blog.CategoryButton, {
         onClick: addContent
       }, "Add Content"));

@@ -39,73 +39,164 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var BlogContentComponent = /*#__PURE__*/function (_Component) {
   _inherits(BlogContentComponent, _Component);
 
   var _super = _createSuper(BlogContentComponent);
 
-  function BlogContentComponent() {
+  function BlogContentComponent(props) {
+    var _this;
+
     _classCallCheck(this, BlogContentComponent);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "selectContent", function (e) {
+      if (e.target.selectionStart != e.target.selectionEnd) {
+        _this.setState({
+          selectedContent: [e.target.selectionStart, e.target.selectionEnd + 1]
+        });
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "addAnchor", function (e) {
+      var selectedContent = _this.state.selectedContent;
+
+      if (selectedContent[0] != "" && selectedContent[1] != "") {
+        var _this$props = _this.props,
+            content = _this$props.content,
+            updateContent = _this$props.updateContent,
+            index = _this$props.index;
+        var newContent = content.content.split("");
+        var link = prompt("copy and paste the link url here.");
+        newContent.splice(selectedContent[0], 0, "<a href=\"".concat(link, "\">"));
+        newContent.splice(selectedContent[1], 0, "</a>");
+        updateContent(index, newContent.join(''));
+
+        _this.setState({
+          selectedContent: ["", ""]
+        });
+      } else {
+        alert("Make a selection! Highlight what you want to link.");
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "addBold", function (e) {
+      var selectedContent = _this.state.selectedContent;
+
+      if (selectedContent[0] != "" && selectedContent[1] != "") {
+        var _this$props2 = _this.props,
+            content = _this$props2.content,
+            updateContent = _this$props2.updateContent,
+            index = _this$props2.index;
+        var _selectedContent = _this.state.selectedContent;
+        var newContent = content.content.split("");
+        newContent.splice(_selectedContent[0], 0, "<strong>");
+        newContent.splice(_selectedContent[1], 0, "</strong>");
+        updateContent(index, newContent.join(''));
+
+        _this.setState({
+          selectedContent: ["", ""]
+        });
+      } else {
+        alert("Make a selection! Highlight what you want to bold.");
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "addBullet", function (e) {
+      var selectedContent = _this.state.selectedContent;
+
+      if (selectedContent[0] != "" && selectedContent[1] != "") {
+        var _this$props3 = _this.props,
+            content = _this$props3.content,
+            updateContent = _this$props3.updateContent,
+            index = _this$props3.index;
+        var _selectedContent2 = _this.state.selectedContent;
+        var newContent = content.content.split("");
+        newContent.splice(_selectedContent2[0], 0, "<li>");
+        newContent.splice(_selectedContent2[1], 0, "</li>");
+        updateContent(index, newContent.join(''));
+
+        _this.setState({
+          selectedContent: ["", ""]
+        });
+      } else {
+        alert("Make a selection! Highlight what you want to turn into a list item.");
+      }
+    });
+
+    _this.state = {
+      selectedContent: ["", ""]
+    };
+    return _this;
   }
 
   _createClass(BlogContentComponent, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          blog = _this$props.blog,
-          _this$props$blog = _this$props.blog,
-          title = _this$props$blog.title,
-          categories = _this$props$blog.categories,
-          author = _this$props$blog.author,
-          share = _this$props$blog.share,
-          _this$props$blog$shar = _this$props$blog.share,
-          facebook = _this$props$blog$shar.facebook,
-          linkedin = _this$props$blog$shar.linkedin,
-          twitter = _this$props$blog$shar.twitter,
-          blurb = _this$props$blog.blurb,
-          content = _this$props$blog.content,
-          date = _this$props$blog.date,
-          updateState = _this$props.updateState,
-          updateAuthor = _this$props.updateAuthor,
-          updateCategories = _this$props.updateCategories,
-          submitForm = _this$props.submitForm,
-          updateContent = _this$props.updateContent,
-          deleteContent = _this$props.deleteContent,
-          updateType = _this$props.updateType;
-      return /*#__PURE__*/_react["default"].createElement(_blogcontent.BlogContent, null, content.map(function (a, i) {
-        return /*#__PURE__*/_react["default"].createElement(_react.Fragment, {
-          key: i
-        }, /*#__PURE__*/_react["default"].createElement(_global.FlexDiv, {
-          style: {
-            justifyContent: "flex-start"
-          }
-        }, /*#__PURE__*/_react["default"].createElement(_blogform.SelectButton, {
-          className: a.type == "h2" ? "selectedCategory" : "",
-          onClick: function onClick() {
-            updateType(i, "h2");
-          }
-        }, "Header"), /*#__PURE__*/_react["default"].createElement(_blogform.SelectButton, {
-          className: a.type == "p" ? "selectedCategory" : "",
-          onClick: function onClick() {
-            updateType(i, "p");
-          }
-        }, "Paragraph"), /*#__PURE__*/_react["default"].createElement(_blogform.SelectButton, {
-          className: a.type == "ul" ? "selectedCategory" : "",
-          onClick: function onClick() {
-            updateType(i, "ul");
-          }
-        }, "List"), /*#__PURE__*/_react["default"].createElement(_blogform.SelectButton, {
-          onClick: function onClick() {
-            deleteContent(i);
-          }
-        }, "Delete")), /*#__PURE__*/_react["default"].createElement(_global.TextArea, {
-          value: a.content,
-          onChange: function onChange(e) {
-            updateContent(i, e.currentTarget.value);
-          }
-        }));
+      var _this2 = this;
+
+      var _this$props4 = this.props,
+          content = _this$props4.content,
+          updateContent = _this$props4.updateContent,
+          deleteContent = _this$props4.deleteContent,
+          updateType = _this$props4.updateType,
+          index = _this$props4.index;
+      return /*#__PURE__*/_react["default"].createElement(_blogcontent.BlogContent, null, /*#__PURE__*/_react["default"].createElement(_global.FlexDiv, {
+        style: {
+          justifyContent: "space-between"
+        }
+      }, /*#__PURE__*/_react["default"].createElement(_global.FlexDiv, null, /*#__PURE__*/_react["default"].createElement(_blogform.SelectButton, {
+        className: content.type == "h2" ? "selectedCategory" : "",
+        onClick: function onClick() {
+          updateType(index, "h2");
+        }
+      }, "Header"), /*#__PURE__*/_react["default"].createElement(_blogform.SelectButton, {
+        className: content.type == "p" ? "selectedCategory" : "",
+        onClick: function onClick() {
+          updateType(index, "p");
+        }
+      }, "Paragraph"), /*#__PURE__*/_react["default"].createElement(_blogform.SelectButton, {
+        className: content.type == "ul" ? "selectedCategory" : "",
+        onClick: function onClick() {
+          updateType(index, "ul");
+        }
+      }, "List")), /*#__PURE__*/_react["default"].createElement(_global.FlexDiv, null, /*#__PURE__*/_react["default"].createElement(_blogform.SelectButton, {
+        color: "#fff",
+        primary: true,
+        title: "Make it Bold. Highlight the text you want to make bold.",
+        onClick: function onClick(e) {
+          return _this2.addBold(e);
+        }
+      }, "Bold"), /*#__PURE__*/_react["default"].createElement(_blogform.SelectButton, {
+        primary: true,
+        title: "Make a Link. Highlight the text you want to link.",
+        onClick: function onClick(e) {
+          return _this2.addAnchor(e);
+        }
+      }, /*#__PURE__*/_react["default"].createElement("i", {
+        className: "fas fa-link"
+      })), /*#__PURE__*/_react["default"].createElement(_blogform.SelectButton, {
+        primary: true,
+        title: "Create bullet point for lists. Highlight the text you want to turn into bullet point.",
+        onClick: function onClick(e) {
+          return _this2.addBullet(e);
+        }
+      }, /*#__PURE__*/_react["default"].createElement("i", {
+        className: "fas fa-list"
+      }))), /*#__PURE__*/_react["default"].createElement(_blogform.SelectButton, {
+        onClick: function onClick() {
+          deleteContent(i);
+        }
+      }, "Delete")), /*#__PURE__*/_react["default"].createElement(_global.TextArea, {
+        value: content.content,
+        onSelect: this.selectContent,
+        onChange: function onChange(e) {
+          updateContent(index, e.currentTarget.value);
+        },
+        id: 'content-textarea-' + index
       }));
     }
   }]);

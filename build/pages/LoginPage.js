@@ -61,7 +61,6 @@ var Login = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "login", function (e) {
-      console.log(_this.state);
       e.preventDefault();
       fetch('/api/auth', {
         method: "POST",

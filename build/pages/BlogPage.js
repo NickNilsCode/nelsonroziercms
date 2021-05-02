@@ -94,7 +94,6 @@ var BlogPage = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "submitForm", function (e) {
       e.preventDefault();
-      console.log(_this.state);
 
       var blog = _objectSpread({}, _this.state);
 
@@ -151,7 +150,7 @@ var BlogPage = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "addContent", function () {
       var arr = _this.state.content;
       arr.push({
-        type: "h1",
+        type: "h2",
         content: ""
       });
 
@@ -214,6 +213,7 @@ var BlogPage = /*#__PURE__*/function (_Component) {
       //     window.location.href = "/"
       //   }
       if (this.props.data.id) {
+        console.log("crash", this.props.data.id);
         fetch('/api/blogs/getOne/' + this.props.data.id).then(function (res) {
           if (res.status === 200) return res.json();else return {};
         }).then(function (blog) {
