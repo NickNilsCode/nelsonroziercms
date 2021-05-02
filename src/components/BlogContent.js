@@ -19,7 +19,11 @@ class BlogContentComponent extends Component {
   }
   addAnchor = (e) => {
     const { selectedContent } = this.state;
-    if(selectedContent[0] != "" && selectedContent[1] != ""){
+    if(
+      typeof selectedContent[0] == "number" &&
+      typeof selectedContent[1] == "number" &&
+      selectedContent[0] != selectedContent[1]
+    ){
       const { content, updateContent, index } = this.props;
       let newContent = content.content.split("")
       let link = prompt("copy and paste the link url here.")
@@ -33,7 +37,11 @@ class BlogContentComponent extends Component {
   }
   addBold = (e) => {
     const { selectedContent } = this.state;
-    if(selectedContent[0] != "" && selectedContent[1] != ""){
+    if(
+      typeof selectedContent[0] == "number" &&
+      typeof selectedContent[1] == "number" &&
+      selectedContent[0] != selectedContent[1]
+    ){
       const { content, updateContent, index } = this.props;
       const { selectedContent } = this.state;
       let newContent = content.content.split("")
@@ -47,7 +55,11 @@ class BlogContentComponent extends Component {
   }
   addBullet = (e) => {
     const { selectedContent } = this.state;
-    if(selectedContent[0] != "" && selectedContent[1] != ""){
+    if(
+      typeof selectedContent[0] == "number" &&
+      typeof selectedContent[1] == "number" &&
+      selectedContent[0] != selectedContent[1]
+    ){
       const { content, updateContent, index } = this.props;
       const { selectedContent } = this.state;
       let newContent = content.content.split("")

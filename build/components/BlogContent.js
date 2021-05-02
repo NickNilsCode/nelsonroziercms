@@ -64,7 +64,7 @@ var BlogContentComponent = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "addAnchor", function (e) {
       var selectedContent = _this.state.selectedContent;
 
-      if (selectedContent[0] != "" && selectedContent[1] != "") {
+      if (typeof selectedContent[0] == "number" && typeof selectedContent[1] == "number" && selectedContent[0] != selectedContent[1]) {
         var _this$props = _this.props,
             content = _this$props.content,
             updateContent = _this$props.updateContent,
@@ -86,7 +86,7 @@ var BlogContentComponent = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "addBold", function (e) {
       var selectedContent = _this.state.selectedContent;
 
-      if (selectedContent[0] != "" && selectedContent[1] != "") {
+      if (typeof selectedContent[0] == "number" && typeof selectedContent[1] == "number" && selectedContent[0] != selectedContent[1]) {
         var _this$props2 = _this.props,
             content = _this$props2.content,
             updateContent = _this$props2.updateContent,
@@ -108,7 +108,7 @@ var BlogContentComponent = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "addBullet", function (e) {
       var selectedContent = _this.state.selectedContent;
 
-      if (selectedContent[0] != "" && selectedContent[1] != "") {
+      if (typeof selectedContent[0] == "number" && typeof selectedContent[1] == "number" && selectedContent[0] != selectedContent[1]) {
         var _this$props3 = _this.props,
             content = _this$props3.content,
             updateContent = _this$props3.updateContent,
