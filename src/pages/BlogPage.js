@@ -8,7 +8,7 @@ class BlogPage extends Component {
       this.state = {
         _id: props.data.id || "",
         edit: props.data.edit || false,
-        title: "",
+        title: "Testing",
         categories: [],
         author: "",
         link: "",
